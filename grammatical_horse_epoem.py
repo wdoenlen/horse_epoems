@@ -122,14 +122,15 @@ def weighted_choice(prob_dist):
             if rnd < weight:
                 return item
     except IndexError:
-        return random.choice("NN", "VB", "JJ")
+        return random.choice(["NN", "VB", "JJ"])
 
-def make_grammatical_poem(verses, N, grammar=kjvdict):
+def make_grammatical_poem(verses, N=10, grammar=kjvdict):
     '''
     Make a poem N lines long that attempts to be
     grammatically correct given a list of verses
     and a "grammar" which is a frequency distribution
-    of POS bigrams
+    of POS bigrams. The verses are assumed to be already
+    tokenized.
     '''
     
     initial = random.choice(verses)
@@ -141,10 +142,10 @@ def make_grammatical_poem(verses, N, grammar=kjvdict):
         initial_tags = nltk.pos_tag(initial)
         final_tag = initial_tags[-1][1]
         next_tag = weighted_choice(grammar.get(final_tag, 'NN'))
-        random.shuffle(tweetlist)
+        random.shuffle(verses)
         
-        for j in range(len(tweetlist)):
-            next_verse = tweetlist[j]
+        for j in range(len(verses)):
+            next_verse = verses[j]
             if nltk.pos_tag(next_verse)[0][1] == next_tag:
                 poem.append(next_verse)
                 initial = next_verse
@@ -164,3 +165,8 @@ def read_poem(verses):
         for word in verse:
             readable += word + " "
         print readable
+
+if __name__ == "__main__":
+    tweets = tokenize_file("tweets.txt")
+    poem = make_grammatical_poem(tweets)
+    read_poem(poem)
