@@ -1,18 +1,18 @@
-Horse _ ePoems
+Horse_ePoems
 ==============
 
-Horse _ ePoems is a series of scripts that makes "poems" based off of tweets from @horse _ ebooks (https://twitter.com/Horse _ ebooks), a Twitter spam bot.
+Horse_ePoems is a series of scripts that makes "poems" based off of tweets from @horse_ebooks (https://twitter.com/Horse_ebooks), a Twitter spam bot.
 
-Grammatical Horse _ ePoems
+Grammatical Horse_ePoems
 --------------------------
 
 `grammatical_horse_epoems.py` takes a file full of tweets (such as `tweets.txt`, included here) and builds a poem using each tweet as one line. The script attempts to preserve grammatical structure from line to line so that the lines flow. In a nutshell, the program uses a bigram model of English grammar to predict which part of speech will follow another part of speech. The algorithm finds the last part of speech in a verse, randomly picks the next part of speech based on a probability distribution of bigrams, and then finds a verse in its database whose first word has the correct part of speech. The program includes functionality to inductively learn grammar from a given text. 
 
 `constants.py` contains a dictionary that acts as a source for the grammar for `grammatical_horse_epoems`. Currently, it uses grammar taken from scanning the Book of Genesis in the King James Bible. Future versions will use a more reasonable corpus for learning English grammar.
 
-`tweets.txt` is a file full of tweets taken from the @horse _ ebooks Twitter page.
+`tweets.txt` is a file full of tweets taken from the @horse_ebooks Twitter page.
 
-To generate your very own grammatical Horse _ ePoem, do the following:
+To generate your very own grammatical Horse_ePoem, do the following:
 
 	python grammatical_horse_epoems.py
 
